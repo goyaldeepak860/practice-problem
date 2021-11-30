@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1> This is Single Books's Details Page </h1> {% comment " the default object  name is model name in small letters or we can use object" %}{% endcomment %}
+    <h2>Author: {{ book.author }}</h2>{% comment "it can also be called like object dot Title" %}{% endcomment %}
+    <p>Book_Name: {{ book.book_name }}</p>
+    <p>Publication_Year: {{ book.publication_year }}</p>
+    <p>No._Of_Pages: {{ book.no_of_pages }}</p>
+    <p>Language: {{ book.book_language }}</p>
+
+    <h1> Please Fill the Form </h1>
+    <form method= "POST" enctype= "multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit">
+    </form>
+{% endblock content %}

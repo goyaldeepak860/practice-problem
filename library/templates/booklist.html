@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+ <h1> This is Book list Page </h1>
+    {% for singleb in book_list %}
+        <ul>
+            <h2><li><a href="{% url 'customerupdate' singleb.id %}">{{singleb.book_name}}</li></a><h2>
+            <p> {{singleb.author}}</p><br>
+        </ul>
+    {% endfor %}
+{% endblock content%}
