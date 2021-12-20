@@ -47,6 +47,17 @@ class Rating(models.Model):
         now = timezone.now()
         return now - timedelta(days=7) <= self.rating_date
     is_rating_recent.boolean = True
+    
+    def movie_average(self):
+     if self.ratings < 3 :
+         average='Below Average'
+         return average
+     elif self.ratings == 3 : 
+         average='Average'
+         return average 
+     else:
+         average= 'Above Average'
+         return average   
        
             
     

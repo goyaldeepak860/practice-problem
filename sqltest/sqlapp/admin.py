@@ -20,7 +20,7 @@ class UserAdmin(admin.ModelAdmin):
     
 @admin.register(Rating)
 class RatingAdmin(admin.ModelAdmin):
-    list_display = ['id','user_name','title', 'ratings', 'rating_date', 'is_rating_recent']
+    list_display = ['id','user_name','title', 'ratings', 'rating_date', 'is_rating_recent', 'movie_average']
 # admin.site.register(Actor)
 # admin.site.register(FilmDirector)
 # admin.site.register(Movies)
