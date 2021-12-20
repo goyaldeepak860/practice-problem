@@ -50,14 +50,11 @@ class Rating(models.Model):
     
     def movie_average(self):
      if self.ratings < 3 :
-         average='Below Average'
-         return average
+         return 'Below Average'
      elif self.ratings == 3 : 
-         average='Average'
-         return average 
+         return 'Average' 
      else:
-         average= 'Above Average'
-         return average   
+         return 'Above Average'   
        
             
     
