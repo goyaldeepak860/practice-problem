@@ -5,27 +5,31 @@ from django.utils import timezone
 
 # Create your models here.
 class Actor(models.Model):
-    name = models.CharField(max_length=250)
-    age =  models.IntegerField()
-    birth_country = models.CharField(max_length=250)
+    actor_name = models.CharField(max_length=250)
+    actor_age =  models.IntegerField()
+    actor_birth_country = models.CharField(max_length=250)
+    
         
     def __str__(self):
-        return self.name
+        return self.actor_name
 
 class FilmDirector(models.Model):
-    name = models.CharField(max_length=250)
-    age =  models.IntegerField()
-    birth_country = models.CharField(max_length=250)
+    director_name = models.CharField(max_length=250)
+    director_age =  models.IntegerField()
+    director_birth_country = models.CharField(max_length=250)
        
     def __str__(self):
-        return self.name
+        return self.director_name
     
 class Movies(models.Model):
     director = models.ForeignKey(FilmDirector, on_delete=models.CASCADE, blank=False, null=True)
     title = models.CharField(max_length=250, blank=False, null=False, default="")
     year =  models.IntegerField()
     actor = models.ManyToManyField(Actor)
-       
+    
+    def movies_actors(self):
+        return ",".join([str(p) for p in self.actor.all()])
+    
     def __str__(self):
         return self.title or ''
     
@@ -55,7 +59,9 @@ class Rating(models.Model):
          return 'Average' 
      else:
          return 'Above Average'   
-       
+     
+class NewRating(Rating):
+    feedback = models.CharField(max_length=100, default="", blank=True, null=True)
             
     
     
