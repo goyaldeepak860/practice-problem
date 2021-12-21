@@ -16,7 +16,7 @@ class MoviesAdmin(admin.ModelAdmin):
     
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['id','name','email']
+    list_display = ['id','user_name','user_email']
     
 @admin.register(Rating)
 class RatingAdmin(admin.ModelAdmin):

@@ -25,3 +25,11 @@ def jointhreetables(request):
     r = dictfetchall(cursor)
     print(r)
     return render (request, 'output.html',{'results': r})
+
+
+def jointhreetables_manytomany(request):
+    cursor=connection.cursor()
+    cursor.execute("SELECT * from sqlapp_movies_actor join sqlapp_actor on sqlapp_movies_actor.actor_id = sqlapp_actor.id join sqlapp_movies on sqlapp_movies.id = sqlapp_movies_actor.movies_id join sqlapp_filmdirector on sqlapp_filmdirector.id = sqlapp_movies.director_id Join sqlapp_rating ON sqlapp_rating.title_id = sqlapp_movies.id join sqlapp_user on sqlapp_user.id = sqlapp_rating.user_name_id" )
+    r = dictfetchall(cursor)
+    print(r)
+    return render (request, 'output.html',{'resultnew': r})

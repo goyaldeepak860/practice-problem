@@ -5,4 +5,5 @@ from . import views
 urlpatterns = [
     path('movielist/', views.jointables, name='tablesjoin'),
     path('movielist2/', views.jointhreetables, name='jointhreetables'),
+    path('movielist3/', views.jointhreetables_manytomany, name='jointhreetablesmanytomany'),
 ]

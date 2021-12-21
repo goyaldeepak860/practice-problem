@@ -35,11 +35,11 @@ class Movies(models.Model):
     
     
 class User(models.Model):
-    name = models.CharField(max_length=250)
-    email=  models.EmailField()
+    user_name = models.CharField(max_length=250)
+    user_email=  models.EmailField()
         
     def __str__(self):
-        return self.name
+        return self.user_name
 
 class Rating(models.Model):
     user_name = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=True)
