@@ -40,30 +40,51 @@ class User(models.Model):
         
     def __str__(self):
         return self.user_name
+class IsRecentManager(models.Manager):
+    def get_queryset(self):
+        # now = timezone.now()
+        # is_rating_recent_boolean = (now - datetime.timedelta(days=7) <= self.rating_date)
+        return super().get_queryset().filter(rating_date__gte = timezone.now() - timedelta(days=7))
+        # return super().get_queryset().filter(ratings='4')
+
+
+# class IsRecentManager(models.Manager):
+#     def is_rating_recent(self):
+#         now = timezone.now()
+#         is_rating_recent_boolean = ((now - timedelta(days=7)) <= Rating.rating_date) #conditional expression #Avoid returning conditions
+#         return self.annotate(xy = is_rating_recent_boolean)
+
+
 
 class Rating(models.Model):
     user_name = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=True)
     title =  models.ForeignKey(Movies, on_delete=models.CASCADE, blank=False, null=True)
     ratings=  models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
-    rating_date= models.DateTimeField('date published')
-  
-    def is_rating_recent(self):
-        now = timezone.now()
-        return now - timedelta(days=7) <= self.rating_date
-    is_rating_recent.boolean = True
+    rating_date= models.DateTimeField()
+    objects= models.Manager()
+    is_recent_ratings = IsRecentManager()
     
+
+
+    # def is_rating_recent(self):
+    #     now = timezone.now()
+    #     is_rating_recent_boolean = (now - timedelta(days=7) <= self.rating_date) #conditional expression #Avoid returning conditions
+    #     return (is_rating_recent_boolean)
+    # is_rating_recent.boolean = True
+    
+   
+   
     def movie_average(self):
      if self.ratings < 3 :
          return 'Below Average'
-     elif self.ratings == 3 : 
-         return 'Average' 
+     elif self.ratings == 3 :
+         return 'Average'
      else:
-         return 'Above Average'   
+         return 'Above Average'
      
 class NewRating(Rating):
     feedback = models.CharField(max_length=100, default="", blank=True, null=True)
             
-    
-    
+
         
     
